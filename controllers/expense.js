@@ -91,3 +91,16 @@ exports.updateExpense = (req, res, next) => {
     });
   });
 };
+
+/**
+ * POST /expense/delete/{id}
+ * Delete an Expense
+ */
+exports.deleteExpense = (req, res, next) => {
+  console.log("ID: "+ req.params.id);
+  Expense.remove({ _id: req.params.id }, (err) => {
+    if (err) { return next(err); }
+    req.flash('info', { msg: 'Expense has been deleted.' });
+    res.redirect('/expenses');
+  });
+};

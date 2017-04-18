@@ -134,6 +134,7 @@ app.get('/expense', passportConfig.isAuthenticated, expenseController.getExpense
 app.post('/expense', passportConfig.isAuthenticated, expenseController.postExpense);
 
 app.post('/expense/:id', passportConfig.isAuthenticated, expenseController.updateExpense);
+app.post('/expense/delete/:id', passportConfig.isAuthenticated, expenseController.deleteExpense);
 
 /**
  * Error Handler.

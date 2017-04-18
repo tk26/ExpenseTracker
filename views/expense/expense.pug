@@ -23,3 +23,9 @@ block content
      .form-group
       .col-sm-offset-3.col-sm-7
         button.btn.btn-success(type='submit') Update
+   
+   form.form-horizontal(id='delete-expense-form', action='/expense/delete/' + expense._id, method='POST')
+     input(type='hidden', name='_csrf', value=_csrf)
+     .form-group
+      .col-sm-offset-3.col-sm-7
+        button.btn.btn-danger(type='submit') Delete
