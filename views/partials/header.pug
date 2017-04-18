@@ -15,7 +15,9 @@
           a(href='/') Home
         if user  
           li(class=(title == 'Expenses') ? 'active' : undefined)
-            a(href='/expenses') Expenses
+            a(href='/expenses') All Expenses
+          li(class=(title == 'Expenses') ? 'active' : undefined)
+            a(href='/expense') Add Expense
       ul.nav.navbar-nav.navbar-right
         if !user
           li(class=(title == 'Login') ? 'active' : undefined)
