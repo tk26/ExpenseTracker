@@ -5,9 +5,18 @@
 const Expense = require('../models/Expense');
 
 exports.getExpenses = (req, res) => {
-  Expense.find((err, docs) => {
+  console.log("Logged In User Email: "+req.user.email + " Role: " + req.user.role);
+  if(req.user.role == 0){
+  	Expense.find((err, docs) => {
     res.render('expense/expenses', { title: 'All Expenses', expenses: docs });
-  });
+  	});	
+  }
+  else{
+  	Expense.find({ UserEmail: req.user.email }, (err, docs) => {
+	  res.render('expense/expenses', { title: 'All Expenses', expenses: docs });
+  	});
+  }
+  
 };
 
 /**
