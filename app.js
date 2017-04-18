@@ -32,6 +32,7 @@ dotenv.load({ path: '.env.example' });
  */
 const homeController = require('./controllers/home');
 const userController = require('./controllers/user');
+const expenseController = require('./controllers/expense');
 
 /**
  * API keys and Passport configuration.
@@ -125,6 +126,9 @@ app.get('/account', passportConfig.isAuthenticated, userController.getAccount);
 app.post('/account/profile', passportConfig.isAuthenticated, userController.postUpdateProfile);
 app.post('/account/password', passportConfig.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
+
+app.get('/expenses', passportConfig.isAuthenticated, expenseController.getExpenses);
+app.get('/expense/:id', passportConfig.isAuthenticated, expenseController.getExpenseById);
 
 /**
  * Error Handler.
