@@ -6,5 +6,9 @@ block content
 
   ul
     for expense in expenses
-      li= expense.Description 
-      a(class='button' href= 'expense/'+expense._id) View
+      li #{expense.Description} 
+        a(class='button' href= 'expense/'+expense._id) View 
+        if user.email == expense.UserEmail
+         a(class='button' href= 'expense/'+expense._id) | Edit  
+        if user.role == 0
+         p By: #{expense.UserEmail}

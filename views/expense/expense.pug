@@ -6,3 +6,20 @@ block content
 
   h3 Amount: $#{expense.Amount}
   h4 Created At: #{expense.CreatedAt}
+  if user.role == 0
+   h4 By: #{expense.UserEmail}
+
+  if user.email == expense.UserEmail
+   form.form-horizontal(id='edit-expense-form', method='POST')
+     input(type='hidden', name='_csrf', value=_csrf)
+     .form-group
+      label.col-sm-3.control-label(for='amount') Amount
+      .col-sm-7
+        input.form-control(type='number', step='0.01', name='amount', id='amount', placeholder='Amount', value=expense.Amount, autofocus, required)
+     .form-group
+      label.col-sm-3.control-label(for='description') Description
+      .col-sm-7
+        input.form-control(type='text', name='description', id='description', placeholder='Reason for expense..' value=expense.Description, required)
+     .form-group
+      .col-sm-offset-3.col-sm-7
+        button.btn.btn-success(type='submit') Update

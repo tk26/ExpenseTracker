@@ -130,6 +130,11 @@ app.post('/account/delete', passportConfig.isAuthenticated, userController.postD
 app.get('/expenses', passportConfig.isAuthenticated, expenseController.getExpenses);
 app.get('/expense/:id', passportConfig.isAuthenticated, expenseController.getExpenseById);
 
+app.get('/expense', passportConfig.isAuthenticated, expenseController.getExpense);
+app.post('/expense', passportConfig.isAuthenticated, expenseController.postExpense);
+
+app.post('/expense/:id', passportConfig.isAuthenticated, expenseController.updateExpense);
+
 /**
  * Error Handler.
  */
