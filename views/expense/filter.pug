@@ -1,0 +1,18 @@
+extends ../layout
+
+block content
+  .page-header
+    h3 #{title}
+  form.form-horizontal(id='add-expense-form', action='/expenses/filter', method='GET')
+    input(type='hidden', name='_csrf', value=_csrf)
+    .form-group
+      label.col-sm-3.control-label(for='startDate') Start Date
+      .col-sm-7
+        input.form-control(type='date', name='startDate', id='startDate', required)
+    .form-group
+      label.col-sm-3.control-label(for='endDate') End Date
+      .col-sm-7
+        input.form-control(type='date', name='endDate', id='endDate', required)
+    .form-group
+      .col-sm-offset-3.col-sm-7
+        button.btn.btn-success(type='submit') Show

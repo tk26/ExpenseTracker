@@ -18,6 +18,8 @@
             a(href='/expenses') All Expenses
           li(class=(title == 'Expenses') ? 'active' : undefined)
             a(href='/expense') Add Expense
+          li(class=(title == 'Report') ? 'active' : undefined)
+            a(href='/report') Report
       ul.nav.navbar-nav.navbar-right
         if !user
           li(class=(title == 'Login') ? 'active' : undefined)

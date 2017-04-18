@@ -1,0 +1,12 @@
+extends ../layout
+
+block content
+  .page-header
+    h3 #{title}
+
+  ul
+    for expense in expenses
+      li #{expense.Description} 
+        a(class='button' href= '../expense/'+expense._id) View 
+        if user.email == expense.UserEmail
+         a(class='button' href= '../expense/'+expense._id) | Edit

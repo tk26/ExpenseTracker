@@ -1,8 +1,9 @@
+const Expense = require('../models/Expense');
+
 /**
  * GET /expenses
  * List all expenses.
  */
-const Expense = require('../models/Expense');
 
 exports.getExpenses = (req, res) => {
   console.log("Logged In User Email: "+req.user.email + " Role: " + req.user.role);
@@ -56,7 +57,8 @@ exports.getExpense = (req, res) => {
 exports.postExpense = (req, res, next) => {
   const expense = new Expense({
     UserEmail: req.user.email,
-    CreatedAt: new Date(),
+    //CreatedAt: new Date(),
+    CreatedAt: new Date(req.body.createdAt),
     Amount: req.body.amount,
     Description: req.body.description
   });
@@ -102,5 +104,32 @@ exports.deleteExpense = (req, res, next) => {
     if (err) { return next(err); }
     req.flash('info', { msg: 'Expense has been deleted.' });
     res.redirect('/expenses');
+  });
+};
+
+/**
+ * GET /expenses/filter
+ * Filter Expenses
+ */
+exports.filterExpenses = (req, res) => {
+  console.log("Logged In User Email: "+req.user.email + " Start: " + req.query.startDate + " End: " + req.query.endDate);
+  var startDate = new Date(req.query.startDate).toISOString();
+  var endDate = new Date(req.query.endDate).toISOString();
+  Expense.find({ UserEmail: req.user.email, CreatedAt: {
+  					  $gte: startDate,
+        			$lte: endDate
+    			} }, (err, docs) => {
+    console.log(docs);
+    res.render('expense/filtered', { title: 'Filtered Expenses', expenses: docs });
+  });
+};
+
+/**
+ * GET /report
+ * Report page.
+ */
+exports.getReport = (req, res) => {
+  res.render('expense/filter', {
+    title: 'Filter Report'
   });
 };

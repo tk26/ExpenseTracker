@@ -136,6 +136,10 @@ app.post('/expense', passportConfig.isAuthenticated, expenseController.postExpen
 app.post('/expense/:id', passportConfig.isAuthenticated, expenseController.updateExpense);
 app.post('/expense/delete/:id', passportConfig.isAuthenticated, expenseController.deleteExpense);
 
+app.get('/expenses/filter', passportConfig.isAuthenticated, expenseController.filterExpenses);
+app.get('/report', passportConfig.isAuthenticated, expenseController.getReport);
+
+
 /**
  * Error Handler.
  */
