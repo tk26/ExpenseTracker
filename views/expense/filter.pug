@@ -3,6 +3,14 @@ extends ../layout
 block content
   .page-header
     h3 #{title}
+    h4 2017 Weekly Expenditures ($)
+    h5
+
+     for expense in expenses
+      strong Week #{expense._id}
+      p #{expense.totalExpenses}
+      br
+
   form.form-horizontal(id='add-expense-form', action='/expenses/filter', method='GET')
     input(type='hidden', name='_csrf', value=_csrf)
     .form-group

@@ -129,7 +129,28 @@ exports.filterExpenses = (req, res) => {
  * Report page.
  */
 exports.getReport = (req, res) => {
-  res.render('expense/filter', {
-    title: 'Filter Report'
-  });
+  //Weekly aggregation for 2017
+  var startDate = new Date("January 1, 2017 00:00:00");
+  var endDate = new Date("December 31, 2017 00:00:00");
+  Expense.aggregate([ 
+    { $match: 
+      { CreatedAt: { $gte: startDate, $lt: endDate },
+        UserEmail: req.user.email
+      } 
+    },
+    { $project: 
+      { week: { $week: "$CreatedAt" }, Amount:1}
+    },
+    { $group:
+      {_id:"$week", totalExpenses:{$sum:"$Amount"}}
+    }    
+    ] , (err, docs) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+    console.log(docs);
+    res.render('expense/filter', { title: 'Filter Report', expenses: docs });
+    }
+  );
 };
