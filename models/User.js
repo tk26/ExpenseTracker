@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema({
     picture: String
   },
 
-  role: Number
+  role: { type: Number, default: 1 }
 }, { timestamps: true });
 
 /**
