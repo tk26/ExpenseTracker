@@ -22,10 +22,10 @@ block content
         input.form-control(type='text', name='description', id='description', placeholder='Reason for expense..' value=expense.Description, required)
      .form-group
       .col-sm-offset-3.col-sm-7
-        button.btn.btn-success(type='submit') Update
+        button.btn.btn-success(type='submit', name='update') Update
    
    form.form-horizontal(id='delete-expense-form', action='/expense/delete/' + expense._id, method='POST')
      input(type='hidden', name='_csrf', value=_csrf)
      .form-group
       .col-sm-offset-3.col-sm-7
-        button.btn.btn-danger(type='submit') Delete
+        button.btn.btn-danger(type='submit', name='delete') Delete

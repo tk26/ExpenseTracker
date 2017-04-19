@@ -46,4 +46,53 @@ describe("testing with zombie", function() {
             next();
         });
     });
+
+    it("should be able to visit add an expense page", function(next) {
+        browser.visit("http://localhost:3000/expense", function(err) {
+            expect(browser.success).toBe(true);
+            next();
+        });
+    });
+
+    it("should be able to add an expense", function(next) {
+        browser
+        .fill('input[name="amount"]', 12.01)
+        .fill('input[name="description"]', "Test Expense")
+        .fill('input[name="createdAt"]', "04/18/2017")
+        .pressButton('button[name="add"]', function(res) {
+            expect(browser.html("div#success")).toContain("Expense has been added.");
+            next();
+        });
+    });
+
+    it("should be able to visit an expense page", function(next) {
+        browser.visit("http://localhost:3000/expense/58f6e69c9496ad5443f84ac4", function(err) {
+            expect(browser.success).toBe(true);
+            next();
+        });
+    });
+
+    it("should be able to edit an expense", function(next) {
+        browser
+        .fill('input[name="amount"]', 13.02)
+        .fill('input[name="description"]', "Test Expense Updated")
+        .pressButton('button[name="update"]', function(res) {
+            expect(browser.html("div#success")).toContain("Expense has been updated.");
+            next();
+        });
+    });
+
+    //Delete expense works perfectly, but will have to change expense id in the url to run tests later.
+    //uncomment and use accordingly, Please update expense url accordingly.
+    
+    /*
+    it("should be able to delete an expense", function(next) {
+        browser
+        .pressButton('button[name="delete"]', function(res) {
+            expect(browser.html("div#success")).toContain("Expense has been deleted.");
+            next();
+        });
+    });
+    */
+
 });
